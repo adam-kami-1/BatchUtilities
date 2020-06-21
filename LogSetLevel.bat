@@ -31,6 +31,7 @@ if "%~1" == "" (
    echo Current log level is !$LogLevelName[%$LogCurrLevel%]!
    goto :EOF
 )
+
 REM Translate level name to log level number
 set $LogCurrLevel=!%~1!
 
