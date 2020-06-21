@@ -1,6 +1,13 @@
 # BatchUtilities
 Set of batch scripts ready to be used at Command Prompt.
 
+Some script use scripts from BatchLibrary. To be able to call appropriate 
+scripts there have to be defined environment variable BatchLibrary containing
+path to BatchLibrary. It can be done for example by executing following command:
+
+SetX BatchLibrary D:\Users\Adam\PRJs\GitHub\BatchLibrary
+
+
 * [Automatic tests](#TOC_Automatic_tests)
 
 * [Batch scripts](#TOC_Batch_scripts)
@@ -217,6 +224,31 @@ Script used to initialize, build, run and clear simple text menu.
 
 ### Returns
 Selected item value in result variable.
+
+
+
+<a id="TOC_Sleep"><hr /></a>
+
+## Sleep.bat
+--------------------------------------------------------------------------------
+
+
+### Description
+Wait specified number of seconds.
+
+
+### Parameters
+1. Number of seconds. Invalid value is treated as 0.
+
+
+### Known limitations
+
+
+### Depends
+
+
+### Returns
+None
 
 
 
