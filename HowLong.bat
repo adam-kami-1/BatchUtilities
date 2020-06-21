@@ -13,9 +13,9 @@ set $START=%TIME%
 @echo on
 call %*
 @echo off
-call %~dp0TimeDiff %$START% %TIME%
+call %BatchLibrary%\TimeDiff %$START% %TIME%
 set $RETVALUE=%errorlevel%
-call %~dp0FormatTime $DIFFERENCE %$RETVALUE%
+call %BatchLibrary%\FormatTime $DIFFERENCE %$RETVALUE%
 echo;
 echo The execution of '%*' took %$DIFFERENCE%
 endLocal & exit /b %$RETVALUE%
