@@ -62,11 +62,9 @@ shift
 goto :LogLoop
 
 :LogEcho
-
 echo %~1
-if not "%$LogFile%" == "" (
-  echo %~1 >> "%$LogFile%"
-)
+if "%$LogFile%" == "" goto :EOF
+echo %~1 >> "%$LogFile%"
 goto :EOF
 REM =============================================================================
 

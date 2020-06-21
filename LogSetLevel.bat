@@ -24,7 +24,10 @@ set $LogLevelName[5]=TRACE
 set DEBUG=6
 set $LogLevelName[6]=DEBUG
 
+REM If parameter is empty display current settings
 if "%~1" == "" (
+   REM If Current log level is not valid then set it to 0
+   set /a "$LogCurrLevel=($LogCurrLevel+1)-1"
    echo Current log level is !$LogLevelName[%$LogCurrLevel%]!
    goto :EOF
 )
