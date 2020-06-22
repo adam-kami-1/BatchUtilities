@@ -4,19 +4,35 @@ REM ============================================================================
 :DoTest
 REM ===========
 if "%$VERBOSE%" == "" set $VERBOSE=off
-if "%~1" == "[--]" goto :test-%2
+REM ===========
+REM If the first parameter is "[--]" the exec individual test
+REM ===========
+if "%~1" == "[--]" (
+  REM Execute individual test
+  if /i "%~2" == "Simple-int" goto :test-%2
+  if /i "%~2" == "Simple-str" goto :test-%2
+  echo Invalid test type "%~2". Only Simple-int or Simple-str is allowed.
+  goto :EOF
+)
+
 REM ===========
 REM Parameters are described in :DoTest-usage
 REM ===========
 setLocal
-REM Use local versions of tested batch files
+
+REM Use local versions of utilities batch files
 set $BIN_PATH=%~dp0
-cd /d %$BIN_PATH%
-path %$BIN_PATH%;%PATH%
+
+REM Store current directory
+call %BatchLibrary%\GetPathPart.bat $TEST_PATH f .
+set "$TEST_PATH=%$TEST_PATH%\"
+
 REM Test will use Log.bat
-set $LOG_FILE=%$BIN_PATH%test.log
+set $LOG_FILE=%$TEST_PATH%test.log
+
 REM Global counters
 call :StoreReport 0 0
+
 REM
 REM Get options
 set $VERBOSE=off
@@ -56,10 +72,10 @@ goto :DoTest-report
 
 REM ===========
 :DoTest-report
-call Log.bat
+call %$BIN_PATH%Log.bat
 call :RestoreReport
-call Log.bat Tests passed: %$PASS%
-call Log.bat Tests failed: %$FAIL%
+call %$BIN_PATH%Log.bat Tests passed: %$PASS%
+call %$BIN_PATH%Log.bat Tests failed: %$FAIL%
 call :ClearReport
 endLocal
 goto :EOF
@@ -80,53 +96,25 @@ REM ============================================================================
 
 
 REM ============================================================================
-:GetPathPart
-REM ===========
-setLocal
-REM %1 - Result variable name
-REM %2 - Path part code f ( d p n x ) a t z
-REM %3 - Input path
-REM ===========
-set $RES=%~3
-if "%~2" == "f" set $RES=%~f3
-if "%~2" == "d" set $RES=%~d3
-if "%~2" == "p" set $RES=%~p3
-if "%~2" == "n" set $RES=%~n3
-if "%~2" == "x" set $RES=%~x3
-if "%~2" == "dp" set $RES=%~dp3
-if "%~2" == "dpn" set $RES=%~dpn3
-if "%~2" == "dpnx" set $RES=%~dpnx3
-if "%~2" == "pn" set $RES=%~pn3
-if "%~2" == "pnx" set $RES=%~pnx3
-if "%~2" == "nx" set $RES=%~nx3
-if "%~2" == "a" set $RES=%~a3
-if "%~2" == "t" set $RES=%~t3
-if "%~2" == "z" set $RES=%~z3
-endLocal & set %1=%$RES%& exit /b
-goto :EOF
-REM ============================================================================
-
-
-REM ============================================================================
 :DoTest-run
 REM ===========
 setLocal
 REM %1 - Test name
-call :GetPathPart $NAME n %~1
+call %BatchLibrary%\GetPathPart.bat $NAME n %~1
 REM set $NAME=%~1
 REM ===========
-call Log.bat
-if not exist "%$BIN_PATH%test\test-%$NAME%.bat" (
-  call Log.bat Test %$NAME% not found
+call %$BIN_PATH%Log.bat
+if not exist "%$TEST_PATH%test\test-%$NAME%.bat" (
+  call %$BIN_PATH%Log.bat Test %$NAME% not found
   endLocal
   goto :EOF
 )
-call :GetPathPart $NAME n "%$BIN_PATH%test\test-%$NAME%.bat"
+call %BatchLibrary%\GetPathPart.bat $NAME n "%$TEST_PATH%test\test-%$NAME%.bat"
 set $NAME=%$NAME:~5%
-call Log.bat "##################################################"
-call Log.bat Testing %$NAME%
-call "%$BIN_PATH%test\test-%$NAME%.bat"
-call Log.bat "##################################################"
+call %$BIN_PATH%Log.bat "##################################################"
+call %$BIN_PATH%Log.bat Testing %$NAME%
+call "%$TEST_PATH%test\test-%$NAME%.bat"
+call %$BIN_PATH%Log.bat "##################################################"
 endLocal
 goto :EOF
 REM ============================================================================
@@ -155,9 +143,9 @@ set $INPUT2=%~6
 REM %7 - Third input value
 set $INPUT3=%~7
 REM ===========
-call Log.bat "########################################"
-call Log.bat Test: %$NAME%
-call %$SUB% "%$INPUT1%" "%$INPUT2%" "%$INPUT3%"
+call %$BIN_PATH%Log.bat "########################################"
+call %$BIN_PATH%Log.bat Test: %$NAME%
+call %TEST_PATH%%$SUB% "%$INPUT1%" "%$INPUT2%" "%$INPUT3%"
 set $RESULT=%ERRORLEVEL%
 call :test-Check-Result %$CMP%
 endlocal & exit /b %ERRORLEVEL%
@@ -187,9 +175,9 @@ set $INPUT2=%~6
 REM %7 - Third input value
 set $INPUT3=%~7
 REM ===========
-call Log.bat "########################################"
-call Log.bat Test: %$NAME%
-call %$SUB% $RESULT "%$INPUT1%" "%$INPUT2%" "%$INPUT3%"
+call %$BIN_PATH%Log.bat "########################################"
+call %$BIN_PATH%Log.bat Test: %$NAME%
+call %TEST_PATH%%$SUB% $RESULT "%$INPUT1%" "%$INPUT2%" "%$INPUT3%"
 call :test-Check-Result %$CMP%
 endlocal & exit /b %ERRORLEVEL%
 REM ============================================================================
@@ -227,24 +215,24 @@ goto :test-Check-Result-exec
   set $EXPECTED=%$LOW%..%$UPP%
 :test-Check-Result-exec
 if %$OK% == 1 (
-  call Log.bat OK - Passed
+  call %$BIN_PATH%Log.bat OK - Passed
   if %$VERBOSE% ==  on (
-    call Log.bat Expected result:    [%$EXPECTED%]
-    call Log.bat Received result:    [%$RESULT%]
-    call Log.bat First input value:  [%$INPUT1%]
+    call %$BIN_PATH%Log.bat Expected result:    [%$EXPECTED%]
+    call %$BIN_PATH%Log.bat Received result:    [%$RESULT%]
+    call %$BIN_PATH%Log.bat First input value:  [%$INPUT1%]
     if not "%$INPUT2%" == "" (
-      call Log.bat Second input value: [%$INPUT2%]
+      call %$BIN_PATH%Log.bat Second input value: [%$INPUT2%]
     )
   )
   call :StoreReport +1 +0
   endlocal & exit /b 0
 ) else (
-  call Log.bat FAIL:
-  call Log.bat Expected result:    [%$EXPECTED%]
-  call Log.bat Received result:    [%$RESULT%]
-  call Log.bat First input value:  [%$INPUT1%]
+  call %$BIN_PATH%Log.bat FAIL:
+  call %$BIN_PATH%Log.bat Expected result:    [%$EXPECTED%]
+  call %$BIN_PATH%Log.bat Received result:    [%$RESULT%]
+  call %$BIN_PATH%Log.bat First input value:  [%$INPUT1%]
   if not "%$INPUT2%" == "" (
-    call Log.bat Second input value: [%$INPUT2%]
+    call %$BIN_PATH%Log.bat Second input value: [%$INPUT2%]
   )
   call :StoreReport +0 +1
   endlocal & exit /b 1
