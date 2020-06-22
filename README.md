@@ -11,17 +11,25 @@ SetX BatchLibrary D:\Users\Adam\PRJs\GitHub\BatchLibrary
 * [Automatic tests](#TOC_Automatic_tests)
 
 * [Batch scripts](#TOC_Batch_scripts)
+  * [CreateShortcut.bat](#TOC_CreateShortcut)
+  * [DoTest.bat](#TOC_DoTest)
   * [HowLong.bat](#TOC_HowLong)
+  * [Kill.bat](#TOC_Kill)
   * [Log.bat](#TOC_Log)
   * [LogSetFile.bat](#TOC_LogSetFile)
   * [LogSetLevel.bat](#TOC_LogSetLevel)
   * [Menu.bat](#TOC_Menu)
+  * [Run.bat](#TOC_Run)
+  * [SelectDirectory.bat](#TOC_SelectDirectory)
+  * [SelectFile.bat](#TOC_SelectFile)
   * [Sleep.bat](#TOC_Sleep)
 
 
 
 <a id="TOC_Automatic_tests"></a>Automatic tests
 ================================================================================
+
+Automatic tests are executed using script [DoTest.bat](#TOC_DoTest).
 
 Test are prepared for following scripts:
 
@@ -42,10 +50,56 @@ Following tests are not yet ready:
 Following scripts are unable to test automatically
 
 * Log.bat
+* LogSetFile.bat
+* LogSetLevel.bat
 
 
 <a id="TOC_Batch_scripts"></a>Batch scripts
 ================================================================================
+
+
+<a id="TOC_CreateShortcut"><hr /></a>
+
+## CreateShortcut.bat
+--------------------------------------------------------------------------------
+
+
+### Description
+
+
+### Parameters
+
+
+### Known limitations
+
+
+### Depends
+
+
+### Returns
+
+
+
+<a id="TOC_DoTest"><hr /></a>
+
+## DoTest.bat
+--------------------------------------------------------------------------------
+
+
+### Description
+
+
+### Parameters
+
+
+### Known limitations
+
+
+### Depends
+
+
+### Returns
+
 
 
 <a id="TOC_HowLong"><hr /></a>
@@ -73,6 +127,28 @@ Command and its parameters required to run.
 
 ### Returns
 ERRORLEVEL    - Number of hundredths of a second.
+
+
+
+<a id="TOC_Kill"><hr /></a>
+
+## Kill.bat
+--------------------------------------------------------------------------------
+
+
+### Description
+
+
+### Parameters
+
+
+### Known limitations
+
+
+### Depends
+
+
+### Returns
 
 
 
@@ -227,6 +303,72 @@ Selected item value in result variable.
 
 
 
+<a id="TOC_Run"><hr /></a>
+
+## Run.bat
+--------------------------------------------------------------------------------
+
+
+### Description
+
+
+### Parameters
+
+
+### Known limitations
+
+
+### Depends
+
+
+### Returns
+
+
+
+<a id="TOC_SelectDirectory"><hr /></a>
+
+## SelectDirectory.bat
+--------------------------------------------------------------------------------
+
+
+### Description
+
+
+### Parameters
+
+
+### Known limitations
+
+
+### Depends
+
+
+### Returns
+
+
+
+<a id="TOC_SelectFile"><hr /></a>
+
+## SelectFile.bat
+--------------------------------------------------------------------------------
+
+
+### Description
+
+
+### Parameters
+
+
+### Known limitations
+
+
+### Depends
+
+
+### Returns
+
+
+
 <a id="TOC_Sleep"><hr /></a>
 
 ## Sleep.bat
@@ -234,7 +376,8 @@ Selected item value in result variable.
 
 
 ### Description
-Wait specified number of seconds.
+Wait specified number of seconds. The same functionality (and a bit more) gives 
+Windows tool called timeout (C:\Windows\System32\timeout.exe).
 
 
 ### Parameters
