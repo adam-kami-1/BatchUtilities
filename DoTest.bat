@@ -60,6 +60,7 @@ call Log.bat
 call :RestoreReport
 call Log.bat Tests passed: %$PASS%
 call Log.bat Tests failed: %$FAIL%
+call :ClearReport
 endLocal
 goto :EOF
 
@@ -67,9 +68,9 @@ REM ===========
 :DoTest-usage
 echo Runs all or selected batch tests
 echo;
-echo test-setup [/v] [testName ...]
+echo %~nx0 [/?] [/v] [testName ...]
 echo;
-echo 	/?		Display this info and exit.
+echo 	/ ?		Display this info and exit.
 echo 	/v		Verbose mode.
 echo 	testName	Individual test name to be run instead of all tests.
 echo;
@@ -267,8 +268,8 @@ if %$P% == 0 set $PASS=0
 if %$P% == +1 set /a $PASS+=1
 if %$F% == 0 set $FAIL=0
 if %$F% == +1 set /a $FAIL+=1
-echo set $PASS=%$PASS% > %$BIN_PATH%test\report.bat
-echo set $FAIL=%$FAIL% >> %$BIN_PATH%test\report.bat
+echo set $PASS=%$PASS% > %TEMP%\report.bat
+echo set $FAIL=%$FAIL% >> %TEMP%\report.bat
 endLocal
 goto :EOF
 REM ============================================================================
@@ -277,14 +278,21 @@ REM ============================================================================
 REM ============================================================================
 :RestoreReport
 REM ===========
-if exist %$BIN_PATH%test\report.bat goto :RestoreReport-do
+if exist %TEMP%\report.bat goto :RestoreReport-do
 set $PASS=0
 set $FAIL=0
 goto :EOF
 :RestoreReport-do
-call %$BIN_PATH%test\report.bat
+call %TEMP%\report.bat
 set $PASS=%$PASS%
 set $FAIL=%$FAIL%
 goto :EOF
 REM ============================================================================
 
+
+REM ============================================================================
+:ClearReport
+REM ===========
+if exist %TEMP%\report.bat del %TEMP%\report.bat
+goto :EOF
+REM ============================================================================
