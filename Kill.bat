@@ -14,7 +14,7 @@ if errorlevel 1 (
   REM Application is not running. Nobody to kill.
   exit /b 1
 )
-call Version.bat
+call %BatchLibrary%\Version.bat
 for /l %%A in (1,1,10) do (
   if %VERSION_MAJOR% lss 10 (
     taskkill /f /t /im "%APP%"
