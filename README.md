@@ -63,21 +63,22 @@ Following scripts are unable to test automatically
 ## CreateShortcut.bat
 --------------------------------------------------------------------------------
 
-
 ### Description
+Create shortcut to a file or a directory
 
 
 ### Parameters
-
+1. Shortcut target.
+2. Shortcut name (without .lnk at the end).
 
 ### Known limitations
 
 
 ### Depends
-
+None
 
 ### Returns
-
+None
 
 
 <a id="TOC_DoTest"><hr /></a>

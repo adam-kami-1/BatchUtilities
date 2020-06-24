@@ -1,17 +1,17 @@
 @echo off
-REM Does not work on Windows 10
-
 
 REM ============================================================================
 :CreateShortcut
 REM ===========
 setLocal
 REM %1 Target
-set $TARGET=%~1
+set $TARGET=%~f1
 REM %2 Link name
 set $LINK=%~2
 REM ===========
-powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%$LINK%.lnk');$s.TargetPath='%$TARGET%';$s.Save()"
+REM echo $TARGET=%$TARGET%
+REM echo $LINK=%$LINK%
+powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%$LINK%.lnk');$s.TargetPath='%$TARGET%';$s.Save()" > NUL
 endLocal
 goto :EOF
 REM ============================================================================
