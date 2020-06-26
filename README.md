@@ -140,10 +140,11 @@ ERRORLEVEL    - Number of hundredths of a second.
 
 
 ### Description
-
+Kills the process by PID or Image name.
 
 ### Parameters
-
+1. PID of the process to kill or its Image Name. If Image Name is used
+   then all processes with the same image name are killed.
 
 ### Known limitations
 
@@ -152,6 +153,9 @@ ERRORLEVEL    - Number of hundredths of a second.
 
 
 ### Returns
+0. Application succesfully killed.
+1. Application is not running.
+2. Unable to kill applcation.
 
 
 
