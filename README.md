@@ -371,18 +371,26 @@ Start the application specified by first parameter.
 
 
 ### Description
+Select a directory contained in specified directory.
 
 
 ### Parameters
+1. Result variable name.
+2. Optional, path containing directories to select. If not specified then 
+   directories are selected from current directory.
+3. Optional, directory name mask. If not specified then \* is used.
 
 
 ### Known limitations
 
 
 ### Depends
+[Menu.bat](#TOC_Menu)
 
 
 ### Returns
+Variable specified in first parameter contains full path of selected directory 
+without ending \.
 
 
 
@@ -393,19 +401,25 @@ Start the application specified by first parameter.
 
 
 ### Description
+Select a file from specified directory.
 
 
 ### Parameters
+1. Result variable name.
+2. Optional, path containing files to select. If not specified then files are 
+   selected from current directory.
+3. Optional, file name mask. If not specified then \* is used.
 
 
 ### Known limitations
 
 
 ### Depends
+[Menu.bat](#TOC_Menu)
 
 
 ### Returns
-
+Variable specified in first parameter contains full path of selected file.
 
 
 <a id="TOC_Sleep"><hr /></a>

@@ -15,9 +15,10 @@ if "%$PATH%" == "" (
   for /f "tokens=*" %%A in ('cd') do (
     set $PATH=%%A
   )
-  if "%$MASK%" == "" set $MASK=*
 )
 if "%$PATH:~-1%" == "\" set $PATH=%$PATH:~0,-1%
+if "%$MASK%" == "" set $MASK=*
+
 pushd %$PATH%
 call Menu Init $MENU1
 for %%A in (%$MASK%) do (
@@ -26,6 +27,7 @@ for %%A in (%$MASK%) do (
 call Menu Select $RETVAL $MENU1 "Select file: "
 call Menu Clear $MENU1
 popd
+
 endLocal & set %~1=%$RETVAL%& exit /b
 goto :EOF
 

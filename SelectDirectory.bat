@@ -15,9 +15,10 @@ if "%$PATH%" == "" (
   for /f "tokens=*" %%A in ('cd') do (
     set $PATH=%%A
   )
-  if "%$MASK%" == "" set $MASK=*
 )
 if "%$PATH:~-1%" == "\" set $PATH=%$PATH:~0,-1%
+if "%$MASK%" == "" set $MASK=*
+
 pushd %$PATH%
 call Menu Init $MENU1
 for /d %%A in (%$MASK%) do (
