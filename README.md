@@ -48,11 +48,12 @@ Following tests are not yet ready:
 
 
 
-Following scripts are unable to test automatically
+There are not expected automatic tests for following scripts.
 
 * Log.bat
 * LogSetFile.bat
 * LogSetLevel.bat
+* Ps.bat
 
 
 <a id="TOC_Batch_scripts"></a>Batch scripts
@@ -321,8 +322,7 @@ Display list of processes
 
 
 ### Known limitations
-There are problems with script when window title of one of processes contains 
-vertical bar character.
+Vertical bar character in title of the processes is dropped.
 
 
 ### Depends

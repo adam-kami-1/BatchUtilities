@@ -44,18 +44,13 @@ set $Status=%~6
 set "$UserName=%~7               "
 set "$Username=%$UserName:*\=%"
 set "$CPUTime=          %~8"
-set $WindowTitle=%~9
+set "$WindowTitle=%~9"
 REM ===========
-if "%$WindowTitle%" == "N/A" (
-   set "$PROC=%$ImageName%"
-) else (
-   set "$PROC=%$ImageName% [%$WindowTitle%]"
-)
-if "%USER%" == "" (
-   echo %$UserName:~0,15% %$PID:~-8% %$CPUTime:~-10% %$MemUsage:~-15% %$PROC%
-) else (
-   echo %$PID:~-8% %$CPUTime:~-10% %$MemUsage:~-15% %$PROC%
-)
+set "$WindowTitle=%$WindowTitle:|=%"
+if "%$WindowTitle%" == "N/A" set "$PROC=%$ImageName%"
+if not "%$WindowTitle%" == "N/A" set "$PROC=%$ImageName% [%$WindowTitle%]"
+if "%USER%" == "" echo %$UserName:~0,15% %$PID:~-8% %$CPUTime:~-10% %$MemUsage:~-15% %$PROC%
+if not "%USER%" == "" echo %$PID:~-8% %$CPUTime:~-10% %$MemUsage:~-15% %$PROC%
 goto :EOF
 
 REM ============================================================================
