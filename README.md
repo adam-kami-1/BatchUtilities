@@ -112,7 +112,7 @@ None
 
 
 ### Description
-Run application or a script calculating real time used by it. It dsiplays
+Run application or a script calculating real time used by it. It displays
 used time in human readable format.
 
 
@@ -153,9 +153,9 @@ Kills the process by PID or Image name.
 
 
 ### Returns
-0. Application succesfully killed.
+0. Application successfully killed.
 1. Application is not running.
-2. Unable to kill applcation.
+2. Unable to kill application.
 
 
 
@@ -169,7 +169,7 @@ Kills the process by PID or Image name.
 Simple log utility.
 
 If current log level is not configured with [LogSetLevel.bat](#TOC_LogSetLevel)
-or is configured to ALL then all parameters are displayed to standrad output.
+or is configured to ALL then all parameters are displayed to standard output.
 
 If current log level is configured to one of values: CRITICAL, ERROR, WARNING, 
 INFO, TRACE, DEBUG, then first parameter of Log.bat is treated as a message log
@@ -194,7 +194,7 @@ For all other values of Current Log Level
 - If any of Log Message parameters contains one of following characters space( ), tab( ),
 comma(,), semicolon(;), or equal sign(=) then the parameter have to be surrounded with
 double quotes.
-- The message parameters can not contain double quotes, unles used to surround the 
+- The message parameters can not contain double quotes, unless used to surround the 
 parameter. Double quotes will not be displayed.
 
 ### Depends
@@ -343,18 +343,24 @@ None
 
 
 ### Description
+Start the application specified by first parameter.
 
 
 ### Parameters
+1. Application name.
+2. ... optional arguments to application.
 
 
 ### Known limitations
 
 
 ### Depends
+[Sleep.bat](#TOC_Sleep)
 
 
 ### Returns
+0. Application successfully started.
+1. Unable to verify if application successfully started.
 
 
 
