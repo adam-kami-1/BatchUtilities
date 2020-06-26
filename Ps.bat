@@ -46,6 +46,7 @@ set "$Username=%$UserName:*\=%"
 set "$CPUTime=          %~8"
 set "$WindowTitle=%~9"
 REM ===========
+set "$WindowTitle=%$WindowTitle:"=%"
 set "$WindowTitle=%$WindowTitle:|=%"
 if "%$WindowTitle%" == "N/A" set "$PROC=%$ImageName%"
 if not "%$WindowTitle%" == "N/A" set "$PROC=%$ImageName% [%$WindowTitle%]"
